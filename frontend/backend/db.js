@@ -8,13 +8,17 @@ const mongoDB = async () => {
         console.log("Connected to MongoDB");
 
         const fetched_data = await mongoose.connection.db.collection("food_items").find({}).toArray();
+        const fetched_data1 = await mongoose.connection.db.collection("food_Category").find({}).toArray();
         
-        if (fetched_data.length > 0) {
+        if (fetched_data.length > 0 && fetched_data1.length>0) {
             global.food_items = fetched_data;
-            console.log("Food items fetched and stored globally.");
+            global.food_Category = fetched_data1;
+            console.log("Food items  and food category fetched and stored globally.");
+           
         } else {
             console.log("No food items found in the database.");
             global.food_items = [];
+            global.food_Category = [];
         }
 
     } catch (err) {

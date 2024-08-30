@@ -11,7 +11,7 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(JSON.stringify({email:credentials.email,password:credentials.password}))
-    const response = await fetch("http://localhost:3000/api/loginuser", {
+    const response = await fetch("http://localhost:5000/api/loginuser", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -28,6 +28,7 @@ export default function Login() {
       alert("Enter valid credentials");
     }
     if (json.success) {
+      localStorage.setItem("userEmail",credentials.email);
       localStorage.setItem("authToken",json.authToken);
       console.log(localStorage.setItem("authToken",json.authToken));
      navigate("/");
@@ -80,7 +81,7 @@ export default function Login() {
           Check me out
         </label>
       </div>
-      <button type="submit" className="m-3 btn btn-success">
+      <button  type="submit" className="m-3 btn btn-success">
         Submit
       </button>
       <Link to="/createuser" className="m-3 btn btn-danger">
